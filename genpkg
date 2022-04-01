@@ -1,0 +1,25 @@
+#!/bin/sh
+# GenPKG // stupid simple shell script which opens the Gentoo wiki page for an ebuild
+# Written by speedie
+# This script is licensed under the MIT license.
+
+source ~/.config/genpkg/genpkgrc || source $GENPKG_DOTDIR/genpkgrc
+
+clear ; echo -e "What ebuild would you like to search for? Example: www-client/firefox: "
+echo "For a list of categories, type 'listcategory'"
+
+read GENPKG_NAME
+
+if [[ "$GENPKG_NAME" = "listcategory" ]]; then
+      cat $GENPKG_CATEGORYLIST | less && ${0} && exit 0
+fi
+
+$GENPKG_BROWSER $GENPKG_GENTOO$GENPKG_NAME && echo "Have a good day" && exit 0
+
+exit 1
+
+
+
+
+
+
