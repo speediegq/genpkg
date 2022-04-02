@@ -1,0 +1,6 @@
+GENPKG_BROWSER=links # The browser that will be used. Default is Links, a terminal web browser is recommended.
+GENPKG_GENTOO="https://packages.gentoo.org/packages/" # The URL that will be used.
+GENPKG_DOTDIR=~/.config/genpkg # The directory where this file and possibly others are located.
+GENPKG_USEDMENU=true # Use dmenu or not. GENPKG_DMENU_PATH must be set correctly.
+GENPKG_DMENU_PATH=/usr/bin/dmenu # Where the dmenu binary is
+GENPKG_DMENU_TERMINAL=/usr/bin/st # What terminal will be used to open $GENPKG_BROWSER

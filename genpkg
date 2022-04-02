@@ -1,0 +1,43 @@
+#!/bin/sh
+# GenPKG // stupid simple shell script which opens the Gentoo wiki page for an ebuild
+# Supports dmenu but not required.
+# Written by speedie
+# This script is licensed under the MIT license.
+
+GENPKG_COL_01="\033[01;31m"
+GENPKG_COL_02="\033[0;32m"
+GENPKG_COL_03="\033[0;36m"
+GENPKG_COL_04="\033[0;35m"
+GENPKG_COL_DEF="\033[0m"
+source ~/.config/genpkg/genpkgrc || source $GENPKG_DOTDIR/genpkgrc
+source /etc/portage/make.conf
+
+if [[ "$GENPKG_USEDMENU" = "true" ]]; then
+GENPKG_DMENU_CATEGORY=$(ls -Ap1 --color=auto $PORTDIR | grep / | $GENPKG_DMENU_PATH)
+GENPKG_DMENU_EBUILD=$(ls -Ap1 --color=auto $PORTDIR/$GENPKG_DMENU_CATEGORY | grep / | $GENPKG_DMENU_PATH | sed 's/.$//')
+$GENPKG_DMENU_TERMINAL $GENPKG_BROWSER $GENPKG_GENTOO$GENPKG_DMENU_CATEGORY/$GENPKG_DMENU_EBUILD
+exit 0
+fi
+
+clear ; echo -e "What ebuild would you like to search for? Example: ${GENPKG_COL_04}www-client/firefox"
+echo -e "${GENPKG_COL_01}To quit, type :q"
+echo -e "${GENPKG_COL_02}For a list of packages in a category, type ':lp'"
+echo -e -n "${GENPKG_COL_03}For a list of categories, type ':lc' ${GENPKG_COL_DEF}>${GENPKG_COL_04} " && read GENPKG_NAME
+
+if [[ "$GENPKG_NAME" = ":lc" ]]; then
+      ls -Ap1 --color=auto $PORTDIR | grep / | less && ${0} && exit 0
+elif [[ "$GENPKG_NAME" = ":q" ]]; then
+      exit 0
+elif [[ "$GENPKG_NAME" = ":lp" ]]; then
+      echo -n -e "${GENPKG_COL_DEF}What category? >${GENPKG_COL_04} " ; read GENPKG_CAT_PACKAGE ; ls -Ap1 --color=auto $PORTDIR/$GENPKG_CAT_PACKAGE | grep / | less && ${0} && exit 0
+fi
+
+clear && $GENPKG_BROWSER $GENPKG_GENTOO$GENPKG_NAME && echo -e "${GENPKG_COL_DEF}Have a good day!" && exit 0
+
+exit 1
+
+
+
+
+
+
