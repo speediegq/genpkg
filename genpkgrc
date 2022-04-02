@@ -1,4 +1,0 @@
-GENPKG_BROWSER=links # The browser that will be used. Default is Links, a terminal web browser is recommended.
-GENPKG_GENTOO="https://packages.gentoo.org/packages/" # The URL that will be used.
-GENPKG_DOTDIR=~/.config/genpkg # The directory where this file and possibly others are located.
-GENPKG_CATEGORYLIST=$GENPKG_DOTDIR/genpkg_categories # List of categories that the user can enter.
