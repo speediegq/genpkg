@@ -9,8 +9,9 @@ GENPKG_COL_02="\033[0;32m"
 GENPKG_COL_03="\033[0;36m"
 GENPKG_COL_04="\033[0;35m"
 GENPKG_COL_DEF="\033[0m"
-source ~/.config/genpkg/genpkgrc || source $GENPKG_DOTDIR/genpkgrc
-source /etc/portage/make.conf
+
+. ~/.config/genpkg/genpkgrc || . $GENPKG_DOTDIR/genpkgrc
+. /etc/portage/make.conf || . $GENPKG_MAKECONF
 
 if [[ "$GENPKG_USEDMENU" = "true" ]]; then
 GENPKG_DMENU_CATEGORY=$(ls -Ap1 --color=auto $PORTDIR | grep / | $GENPKG_DMENU_PATH)
